@@ -4,12 +4,12 @@ const prisma = new PrismaClient()
 
 async function main() {
 
-  const users = await prisma.user.createMany(
+  const users = await prisma.user.create(
     {
-      data: [
-        { email: "abc", name: "john" },
-        { email: "abcdef", name: "johnny" },
-      ]
+      data: {
+        name: "ted",
+        email: "hhh",
+      }
     }
   )
   console.dir(users, { depth: null })
