@@ -10,57 +10,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Group {
-  id            Int             @id @default(autoincrement())
-  name          String          @unique
-  UsersOnGroups UsersOnGroups[]
-  expenses      Expense[]
-  Payment       Payment[]
-}
-
 model User {
-  id               Int             @id @default(autoincrement())
-  email            String          @unique
+  id               Int       @id @default(autoincrement())
+  email            String    @unique
   name             String?
-  UsersOnGroups    UsersOnGroups[]
   expenses         Expense[]
-  sentPayments     Payment[]       @relation("Sender")
-  receivedPayments Payment[]       @relation("Receiver")
-}
-
-model UsersOnGroups {
-  user     User     @relation(fields: [userId], references: [id])
-  userId   Int
-  group    Group    @relation(fields: [groupId], references: [id])
-  groupId  Int
-  joinedOn DateTime @default(now())
-
-  @@id([userId, groupId])
+  sentPayments     Payment[] @relation("Sender")
+  receivedPayments Payment[] @relation("Receiver")
 }
 
 model Payment {
   id         Int       @id @default(autoincrement())
   sender     User      @relation("Sender", fields: [senderId], references: [id])
   receiver   User      @relation("Receiver", fields: [receiverId], references: [id])
-  group      Group     @relation(fields: [groupId], references: [id])
   senderId   Int
   receiverId Int
-  groupId    Int
   createdAt  DateTime  @default(now())
   updatedAt  DateTime?
   amount     Float
 }
 
 model Expense {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   item        String
   description String?
   cost        Float
-  currency    Currency @default(USD)
-  Group       Group    @relation(fields: [groupId], references: [id])
-  groupId     Int
-  User        User?    @relation(fields: [userId], references: [id])
-  userId      Int?
+  currency    Currency  @default(USD)
+  User        User      @relation(fields: [userId], references: [id])
+  userId      Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?
 }
 
 enum Currency {

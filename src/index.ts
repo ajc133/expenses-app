@@ -17,8 +17,8 @@ app.get("/users", async (_req, res) => {
 
 app.get("/users/:id", async (req, res) => {
   const { id } = req.params
-  const users = await prisma.user.findUnique({ where: { id: Number(id) } })
-  res.json({ users })
+  const user = await prisma.user.findUnique({ where: { id: Number(id) } })
+  res.json(user)
 })
 
 app.post("/users", async (req, res) => {
@@ -32,9 +32,7 @@ app.post("/users", async (req, res) => {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       // The .code property can be accessed in a type-safe manner
       if (e.code === 'P2002') {
-        console.log(
-          `There is a unique constraint violation, a new user cannot be created with this email: ${email}`
-        )
+        console.log(e.message)
         res.status(409).json({ error: "User with that email already exists" })
         return
       }
@@ -44,27 +42,98 @@ app.post("/users", async (req, res) => {
   }
 })
 
-app.get("/groups", async (_req, res) => {
-  const groups = await prisma.group.findMany()
-  res.json({ groups })
+app.get("/expenses", async (_req, res) => {
+  const expenses = await prisma.expense.findMany()
+  res.json({ expenses })
 })
 
-app.post("/groups", async (req, res) => {
-  const { name } = req.body
+app.post("/expenses", async (req, res) => {
+  // TODO: validate types of request body before attempting insert
+  const { item, userId, cost } = req.body
   try {
-    const group = await prisma.group
-      .create({ data: { name } })
-    res.json({ group })
+    const expenses = await prisma.expense
+      .create({
+        data: {
+          item,
+          userId: Number(userId),
+          cost: Number(cost),
+        }
+      })
+    res.json(expenses)
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       // The .code property can be accessed in a type-safe manner
-      if (e.code === 'P2002') {
-        console.log(
-          `There is a unique constraint violation, a new group cannot be created with this name: ${name}`
-        )
-        res.status(409).json({ error: "Group with that name already exists" })
+      if (e.code === "P2003") {
+        console.log(e.message)
+        res.status(400).json({ error: "Invalid userId" })
       }
     } else {
+      console.log(e.code)
+      throw e
+    }
+  }
+})
+
+app.put("/expenses/:expenseId", async (req, res) => {
+  const { expenseId } = req.params
+  // TODO: validate types of request body before attempting insert
+  const { item, userId, cost } = req.body
+  try {
+    const expenses = await prisma.expense
+      .update({
+        where: {
+          id: Number(expenseId)
+        },
+        data: {
+          item,
+          userId: Number(userId),
+          cost: Number(cost),
+        }
+      })
+    res.json(expenses)
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      // The .code property can be accessed in a type-safe manner
+      if (e.code === "P2003") {
+        console.log(e.message)
+        res.status(400).json({ error: "Invalid userId" })
+      }
+    } else {
+      console.log(e.code)
+      throw e
+    }
+  }
+})
+
+
+app.get("/payments", async (_req, res) => {
+  const payments = await prisma.payment.findMany()
+  res.json({ payments })
+})
+
+
+app.post("/payments", async (req, res) => {
+  // TODO: validate types of request body before attempting insert
+  const { senderId, receiverId, amount } = req.body
+  try {
+    const expense = await prisma.payment
+      .create({
+        data: {
+          senderId: Number(senderId),
+          receiverId: Number(receiverId),
+          amount: Number(amount),
+        }
+      })
+    res.json(expense)
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      // The .code property can be accessed in a type-safe manner
+      if (e.code === "P2003") {
+        console.log(e.message)
+        res.status(400).json({ error: "Invalid id..." })
+      }
+    } else {
+      console.log(e.code)
       throw e
     }
   }
