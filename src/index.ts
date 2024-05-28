@@ -1,6 +1,6 @@
 import express, { Express, Response } from "express";
 import dotenv from "dotenv";
-import { Prisma, PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from "@prisma/client"
 import path from "path"
 
 const prisma = new PrismaClient()
@@ -10,6 +10,7 @@ dotenv.config();
 export const app: Express = express();
 const port = process.env.PORT || 3000;
 app.use(express.json())
+app.use(express.urlencoded({ extended: true })) // parses application/x-www-form-urlencoded
 app.use(express.static("public"))
 
 app.get("/users", async (_req, res) => {
@@ -88,7 +89,7 @@ app.post("/expenses", async (req, res) => {
   // TODO: validate types of request body before attempting insert
   const { item, userId, cost } = req.body
   try {
-    const expenses = await prisma.expense
+    const expense = await prisma.expense
       .create({
         data: {
           item,
@@ -96,7 +97,18 @@ app.post("/expenses", async (req, res) => {
           cost: Number(cost),
         }
       })
-    res.json(expenses)
+    res.format({
+      html: function() {
+        // res.send(`<p>Expense added</p>\n<p>${expense.item}</p>`)
+        res.redirect("/")
+      },
+      json: function() {
+        res.json(expense)
+      },
+      default: function() {
+        res.status(406).send("Not acceptable")
+      }
+    })
   } catch (e) {
     handleError(res, e)
   }

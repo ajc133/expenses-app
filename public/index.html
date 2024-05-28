@@ -15,16 +15,20 @@
 
 <body>
   <h1>Splitwyze</h1>
-  <form>
+  <form action="/expenses" method="post">
     <fieldset>
       <legend>Enter your expense</legend>
       <p>
-        <label for="cost">Cost</label>
-        <input type="number" id="cost" step="0.1" required />
+        <label for="item">Item</label>
+        <input type="text" id="item" name="item" required />
       </p>
       <p>
-        <label for="payer">Who Are You?</label>
-        <input type="text" id="payer" autocomplete="off" />
+        <label for="cost">Cost</label>
+        <input type="number" id="cost" name="cost" step="0.1" required />
+      </p>
+      <p>
+        <label for="userId">Who Are You?</label>
+        <input type="text" id="userId" name="userId" autocomplete="off" />
       </p>
     </fieldset>
     <p>
@@ -39,7 +43,7 @@
     <!-- </ul> -->
   </section>
 
-  <script src="app.js" defer></script>
+  <script src="online-app.js" defer></script>
 
 </body>
 
