@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Splitwyze</title>
+  <link rel="stylesheet" href="./stylesheet.css" type="text/css" />
+  <style type="text/css">
+    .body {
+      width: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Splitwyze</h1>
+  <form>
+    <fieldset>
+      <legend>Enter your expense</legend>
+      <p>
+        <label for="cost">Cost</label>
+        <input type="number" id="cost" step="0.1" required />
+      </p>
+      <p>
+        <label for="payer">Who Are You?</label>
+        <input type="text" id="payer" autocomplete="off" />
+      </p>
+    </fieldset>
+    <p>
+      <button type="submit">Add Expense</button>
+    </p>
+  </form>
+  <section id="expenses">
+    <!-- <h2>Expenses</h2> -->
+    <!-- <ul> -->
+    <!--   <li>John paid $20 for milk on 2024-05-01</li> -->
+    <!--   <li>Mike paid $50 for drugs on 2024-06-01</li> -->
+    <!-- </ul> -->
+  </section>
+
+  <script src="app.js" defer></script>
+
+</body>
+
+</html>

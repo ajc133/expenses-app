@@ -1,6 +1,7 @@
 import express, { Express, Response } from "express";
 import dotenv from "dotenv";
 import { Prisma, PrismaClient } from '@prisma/client'
+import path from "path"
 
 const prisma = new PrismaClient()
 
@@ -9,6 +10,7 @@ dotenv.config();
 export const app: Express = express();
 const port = process.env.PORT || 3000;
 app.use(express.json())
+app.use(express.static("public"))
 
 app.get("/users", async (_req, res) => {
   const users = await prisma.user.findMany()
