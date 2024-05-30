@@ -84,8 +84,6 @@ paths:
                     type: object
                   cost:
                     type: number
-                  currency:
-                    type: string
                   userId:
                     type: number
                   createdAt:
@@ -97,9 +95,8 @@ paths:
                 item: milk
                 description:
                 cost: 1.99
-                currency: USD
                 userId: 1
-                createdAt: '2024-05-30T01:39:51.590Z'
+                createdAt: '2024-05-30T08:51:00.370Z'
                 updatedAt:
       requestBody:
         content:
@@ -137,8 +134,6 @@ paths:
                       type: object
                     cost:
                       type: number
-                    currency:
-                      type: string
                     userId:
                       type: number
                     createdAt:
@@ -150,9 +145,8 @@ paths:
                 item: milk
                 description:
                 cost: 1.99
-                currency: USD
                 userId: 1
-                createdAt: '2024-05-30T01:39:51.590Z'
+                createdAt: '2024-05-30T08:51:00.370Z'
                 updatedAt:
   /payments:
     post:
@@ -181,7 +175,7 @@ paths:
                 id: 1
                 senderId: 1
                 receiverId: 2
-                createdAt: '2024-05-30T01:39:51.987Z'
+                createdAt: '2024-05-30T08:51:00.763Z'
                 updatedAt:
                 amount: 1.99
       requestBody:
@@ -228,7 +222,7 @@ paths:
               - id: 1
                 senderId: 1
                 receiverId: 2
-                createdAt: '2024-05-30T01:39:51.987Z'
+                createdAt: '2024-05-30T08:51:00.763Z'
                 updatedAt:
                 amount: 1.99
   /expenses/{id}:
@@ -276,8 +270,6 @@ paths:
                     type: object
                   cost:
                     type: number
-                  currency:
-                    type: string
                   userId:
                     type: number
                   createdAt:
@@ -289,9 +281,8 @@ paths:
                 item: candy
                 description:
                 cost: 1.99
-                currency: USD
                 userId: 1
-                createdAt: '2024-05-30T01:39:51.590Z'
+                createdAt: '2024-05-30T08:51:00.370Z'
                 updatedAt:
       parameters:
       - name: id
@@ -354,7 +345,7 @@ paths:
                 id: 1
                 senderId: 1
                 receiverId: 2
-                createdAt: '2024-05-30T01:39:51.987Z'
+                createdAt: '2024-05-30T08:51:00.763Z'
                 updatedAt:
                 amount: 1.99
       parameters:
