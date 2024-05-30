@@ -11,7 +11,8 @@ export const app: Express = express();
 const port = process.env.PORT || 3000;
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) // parses application/x-www-form-urlencoded
-app.use(express.static("public"))
+app.use(express.static("./static"))
+app.use(express.static("./dist/public"))
 
 app.get("/users", async (_req, res) => {
   const users = await prisma.user.findMany()
