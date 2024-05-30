@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Expense App Tracker
+  title: ./flowfile Mitmproxy2Swagger
   version: 1.0.0
 servers:
 - url: http://localhost:3000
@@ -17,20 +17,16 @@ paths:
               schema:
                 type: object
                 properties:
-                  user:
-                    type: object
-                    properties:
-                      id:
-                        type: number
-                      email:
-                        type: string
-                      name:
-                        type: string
+                  id:
+                    type: number
+                  email:
+                    type: string
+                  name:
+                    type: string
               example:
-                user:
-                  id: 1
-                  email: test
-                  name: john
+                id: 1
+                email: test
+                name: john
       requestBody:
         content:
           application/json:
@@ -52,27 +48,23 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  users:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        email:
-                          type: string
-                        name:
-                          type: string
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    email:
+                      type: string
+                    name:
+                      type: string
               example:
-                users:
-                - id: 1
-                  email: test
-                  name: john
-                - id: 2
-                  email: test2
-                  name: jill
+              - id: 1
+                email: test
+                name: john
+              - id: 2
+                email: test2
+                name: jill
   /expenses:
     post:
       summary: POST expenses
@@ -107,7 +99,7 @@ paths:
                 cost: 1.99
                 currency: USD
                 userId: 1
-                createdAt: '2024-05-28T01:08:26.825Z'
+                createdAt: '2024-05-30T01:39:51.590Z'
                 updatedAt:
       requestBody:
         content:
@@ -133,39 +125,35 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  expenses:
-                    type: array
-                    items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    item:
+                      type: string
+                    description:
                       type: object
-                      properties:
-                        id:
-                          type: number
-                        item:
-                          type: string
-                        description:
-                          type: object
-                        cost:
-                          type: number
-                        currency:
-                          type: string
-                        userId:
-                          type: number
-                        createdAt:
-                          type: string
-                        updatedAt:
-                          type: object
+                    cost:
+                      type: number
+                    currency:
+                      type: string
+                    userId:
+                      type: number
+                    createdAt:
+                      type: string
+                    updatedAt:
+                      type: object
               example:
-                expenses:
-                - id: 1
-                  item: milk
-                  description:
-                  cost: 1.99
-                  currency: USD
-                  userId: 1
-                  createdAt: '2024-05-28T01:08:26.825Z'
-                  updatedAt:
+              - id: 1
+                item: milk
+                description:
+                cost: 1.99
+                currency: USD
+                userId: 1
+                createdAt: '2024-05-30T01:39:51.590Z'
+                updatedAt:
   /payments:
     post:
       summary: POST payments
@@ -193,7 +181,7 @@ paths:
                 id: 1
                 senderId: 1
                 receiverId: 2
-                createdAt: '2024-05-28T01:08:27.278Z'
+                createdAt: '2024-05-30T01:39:51.987Z'
                 updatedAt:
                 amount: 1.99
       requestBody:
@@ -220,33 +208,29 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  payments:
-                    type: array
-                    items:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                    senderId:
+                      type: number
+                    receiverId:
+                      type: number
+                    createdAt:
+                      type: string
+                    updatedAt:
                       type: object
-                      properties:
-                        id:
-                          type: number
-                        senderId:
-                          type: number
-                        receiverId:
-                          type: number
-                        createdAt:
-                          type: string
-                        updatedAt:
-                          type: object
-                        amount:
-                          type: number
+                    amount:
+                      type: number
               example:
-                payments:
-                - id: 1
-                  senderId: 1
-                  receiverId: 2
-                  createdAt: '2024-05-28T01:08:27.278Z'
-                  updatedAt:
-                  amount: 1.99
+              - id: 1
+                senderId: 1
+                receiverId: 2
+                createdAt: '2024-05-30T01:39:51.987Z'
+                updatedAt:
+                amount: 1.99
   /expenses/{id}:
     get:
       summary: GET expenses by id
@@ -307,7 +291,7 @@ paths:
                 cost: 1.99
                 currency: USD
                 userId: 1
-                createdAt: '2024-05-28T01:08:26.825Z'
+                createdAt: '2024-05-30T01:39:51.590Z'
                 updatedAt:
       parameters:
       - name: id
@@ -370,7 +354,7 @@ paths:
                 id: 1
                 senderId: 1
                 receiverId: 2
-                createdAt: '2024-05-28T01:08:27.278Z'
+                createdAt: '2024-05-30T01:39:51.987Z'
                 updatedAt:
                 amount: 1.99
       parameters:
@@ -470,7 +454,7 @@ paths:
         schema:
           type: string
 x-path-templates:
-# Remove the ignore: prefix to generate an endpoint with its URL
+# Remove the  prefix to generate an endpoint with its URL
 # Lines that are closer to the top take precedence, the matching is greedy
 - /expenses/1
 - /payments/1

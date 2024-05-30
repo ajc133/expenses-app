@@ -1,7 +1,16 @@
-import { Expense } from "@prisma/client"
+import { Expense, User } from "@prisma/client"
 
 const pastExpenseContainer = document.getElementById("expenses")
 
+async function getUsers() {
+  try {
+    const response = await fetch("/users")
+  }
+  catch (error) {
+
+  }
+
+}
 async function renderPastExpenses() {
   try {
     const response = await fetch("/expenses")

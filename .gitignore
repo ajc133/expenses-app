@@ -68,5 +68,5 @@ package-lock.json
 .env
 dev.db*
 /dist
-flows
+flowfile
 redoc-static.html

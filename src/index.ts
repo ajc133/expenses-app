@@ -16,7 +16,7 @@ app.use(express.static("./dist/public"))
 
 app.get("/users", async (_req, res) => {
   const users = await prisma.user.findMany()
-  res.json({ users })
+  res.json(users)
 })
 
 app.get("/users/:id", async (req, res) => {
@@ -30,7 +30,7 @@ app.post("/users", async (req, res) => {
   try {
     const user = await prisma.user
       .create({ data: { email, name } })
-    res.json({ user })
+    res.json(user)
   }
   catch (e) {
     handleError(res, e)
@@ -76,7 +76,7 @@ app.delete("/users/:id", async (req, res) => {
 
 app.get("/expenses", async (_req, res) => {
   const expenses = await prisma.expense.findMany()
-  res.json({ expenses })
+  res.json(expenses)
 })
 
 app.get("/expenses/:id", async (req, res) => {
@@ -155,7 +155,7 @@ app.delete("/expenses/:id", async (req, res) => {
 
 app.get("/payments", async (_req, res) => {
   const payments = await prisma.payment.findMany()
-  res.json({ payments })
+  res.json(payments)
 })
 
 app.get("/payments/:id", async (req, res) => {
